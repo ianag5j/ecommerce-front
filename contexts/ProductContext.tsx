@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
+import Product from '../Interfaces/Product'
 
-export const ProductContext = createContext({
+export const ProductContext = createContext<{ cart: Array<Product>, setCart: Function }>({
   cart: [],
   setCart: () => { }
 })
