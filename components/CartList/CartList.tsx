@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { ProductContext } from '../../contexts/ProductContext'
+import getTotalAmount from '../../helpers/getTotalAmount'
 
 const CartList = () => {
   const { cart } = useContext(ProductContext)
@@ -11,7 +12,7 @@ const CartList = () => {
         ))}
       </ul>
       <hr />
-      <span className='ml-auto'>Total: ${Math.round(cart.reduce((partialSum, product) => partialSum + parseFloat(`${product.price}`), 0))}</span>
+      <span className='ml-auto'>Total: ${getTotalAmount(cart)}</span>
     </div>
   )
 }
