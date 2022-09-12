@@ -20,8 +20,8 @@ const Home: NextPage = () => {
 
       <div>
         <div className='flex gap-3 flex-row'>
-          <ProductCard product={{ id: 1, name: 'TV', price: 9999.99 }} />
-          <ProductCard product={{ id: 2, name: 'iphone', price: 99999.99 }} />
+          <ProductCard product={{ id: 1, name: 'TV', price: 1 }} />
+          <ProductCard product={{ id: 2, name: 'iphone', price: .99 }} />
         </div>
         {showCartList && (
           <Modal title="Carrito" footer={
