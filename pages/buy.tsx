@@ -10,7 +10,7 @@ const Buy = () => {
   return (
     <>
       <h2>Finalizar Compra</h2>
-      <div className='dark:bg-surface-dark bg-surface m-2 rounded-md p-4 w-9/12 flex flex-col gap-5'>
+      <div className='dark:bg-surface-dark bg-surface m-2 rounded-md p-4 w-9/12 flex flex-col gap-5 mx-auto'>
         <CartList />
         <button className='rounded p-2 dark:bg-primary-dark bg-primary' disabled={isLoading} onClick={async () => {
           try {
