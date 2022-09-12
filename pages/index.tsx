@@ -1,16 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import CartList from '../components/CartList/CartList'
 import Modal from '../components/Modal'
 import ProductCard from '../components/ProductCard'
-import ProductContextContainer, { ProductContext } from '../contexts/ProductContext'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
-  const { cart } = useContext(ProductContext)
   const [showCartList, setShowCartList] = useState(false)
   const router = useRouter()
   return (
@@ -21,7 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <div>
         <div className='flex gap-3 flex-row'>
           <ProductCard product={{ id: 1, name: 'TV', price: 9999.99 }} />
           <ProductCard product={{ id: 2, name: 'iphone', price: 99999.99 }} />
@@ -51,20 +48,7 @@ const Home: NextPage = () => {
         <div className='w-full dark:bg-surface-dark bg-surface p-4 absolute bottom-0'>
           <button className='rounded p-2 dark:bg-primary-dark bg-primary ml-auto' onClick={() => setShowCartList(true)}>Finalizar compra</button>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      </div>
     </div>
   )
 }
