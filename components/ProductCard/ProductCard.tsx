@@ -8,7 +8,7 @@ const ProductCard = ({ product: { id, name, price } }: any) => {
       <p className='text-lg'>${price}</p>
       <p>{name}</p>
       <button className="rounded p-2 bg-sky-500 w-full" onClick={() => {
-        cart.push({ id, cant: 1, name });
+        cart.push({ id, cant: 1, name, price });
         setCart(cart)
       }}>Agregar al carrito</button>
       <button className="rounded p-2 bg-sky-700">Comprar</button>
