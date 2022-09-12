@@ -6,7 +6,7 @@ const ProductCard = ({ product: { id, name, price } }: any) => {
   const { cart, setCart } = useContext(ProductContext)
   return (
     <Box>
-      <p className='text-lg'>${price}</p>
+      <b className='text-lg'>${price}</b>
       <p>{name}</p>
       <button className="rounded p-2 dark:bg-secondary-dark bg-secondary w-full" onClick={() => {
         console.log(cart);
