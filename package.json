@@ -13,11 +13,13 @@
     "@heroicons/react": "^2.0.11",
     "amazon-cognito-identity-js": "^5.2.10",
     "axios": "^0.27.2",
+    "js-cookie": "^3.0.1",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.2",
     "@types/node": "18.7.16",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
