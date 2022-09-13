@@ -26,7 +26,7 @@ const createOrder = async (amount: number) => {
   const accessToken = await getToken()
   const data = {
     "userName": process.env.UALA_USER_NAME,
-    "amount": '10',
+    "amount": amount.toString(),
     "description": "Venta",
     "callback_fail": `${process.env.BASE_URL}/fail`,
     "callback_success": `${process.env.BASE_URL}/success`,
