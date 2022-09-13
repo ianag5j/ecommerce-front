@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import Box from '../components/Box'
 import CartList from '../components/CartList/CartList'
 import { ProductContext } from '../contexts/ProductContext'
 
@@ -12,9 +13,9 @@ const Success = () => {
   return (
     <>
       <h2>Compra Finalizada</h2>
-      <div className='dark:bg-surface-dark bg-surface rounded-md p-4 w-9/12 mx-auto'>
+      <Box>
         <CartList />
-      </div>
+      </Box>
     </>
   )
 }

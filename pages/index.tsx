@@ -19,10 +19,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='flex gap-3 flex-row w-full'>
-        <ProductCard product={{ id: 1, name: 'TV', price: 1 }} />
-        <ProductCard product={{ id: 2, name: 'iphone', price: .99 }} />
-      </div>
+      <ProductCard product={{ id: 1, name: 'TV', price: 1 }} />
+      <ProductCard product={{ id: 2, name: 'iphone', price: .99 }} />
       <RigthDrawer isOpen={showCartList} onClose={setShowCartList} title="Carrito">
         <>
           <CartList />
@@ -43,7 +41,7 @@ const Home: NextPage = () => {
         </>
       </RigthDrawer>
       <div className='w-full dark:bg-surface-dark bg-surface p-4 absolute bottom-0 left-0'>
-        <button className='rounded p-2 dark:bg-primary-dark bg-primary ml-auto' onClick={() => setShowCartList(true)}>Finalizar compra</button>
+        <button className='rounded p-2 dark:bg-primary-dark bg-primary ml-auto sm:w-auto w-full float-right' onClick={() => setShowCartList(true)}>Finalizar compra</button>
       </div>
     </>
   )
