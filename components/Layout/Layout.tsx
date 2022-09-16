@@ -2,8 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import Menu from '../UI/Menu'
+import { useRouter } from 'next/router'
 
 const Layout = ({ children }) => {
+  const router = useRouter()
+  if (router.pathname.includes('redirect')) {
+    return children
+  }
   return (
     <>
       <main className='main-container'>
