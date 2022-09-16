@@ -15,16 +15,26 @@ const saveCredentials = async (accessToken: string, userCredentials: any) => (
   })
 )
 
+const getCredentials = async (accessToken: string, provider: string) => {
+  const { data } = await axios.get(`${process.env.LAMBDA_URL}/credentials`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+  return data
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    if (req.method !== 'POST') {
-      return res.status(400).json({})
-    }
     if (!req.headers.authorization) {
       return res.status(401).json({})
+    }
+    if (req.method === 'GET') {
+      const credentials = await getCredentials(req.headers.authorization, 'Uala')
+      return res.status(200).json({ credentials })
     }
 
     const { data } = await axios.get(`${process.env.UALA_BFF_URL}/authorize`, {
