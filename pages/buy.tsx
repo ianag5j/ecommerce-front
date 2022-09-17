@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import Box from '../components/Box'
 import CartList from '../components/CartList/CartList'
 import Button from '../components/UI/Button'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
@@ -10,9 +11,9 @@ const Buy = () => {
   const { cart } = useContext(ProductContext)
   const [isLoading, setIsLoading] = useState(false)
   return (
-    <>
-      <h2>Finalizar Compra</h2>
-      <div className='dark:bg-surface-dark bg-surface m-2 rounded-md p-4 w-9/12 flex flex-col gap-5 mx-auto'>
+    <div className='flex flex-col gap-3'>
+      <h2 className='text-xl mb-3'>Finalizar Compra</h2>
+      <Box>
         <CartList />
         <Button disabled={isLoading} onClick={async () => {
           try {
@@ -28,8 +29,8 @@ const Buy = () => {
             <LoadingSpinner />
           )}
         </Button>
-      </div>
-    </>
+      </Box>
+    </div>
   )
 }
 
