@@ -1,17 +1,5 @@
-
-
-import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-const getCredentials = async (accessToken: string, provider: string) => {
-  const { data: { credentials } } = await axios.get(`${process.env.LAMBDA_URL}/credentials`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    },
-    params: { provider }
-  })
-  return credentials
-}
+import { getCredentials } from '../../services/back/credentials'
 
 export default async function handler(
   req: NextApiRequest,
