@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Box from '../components/Box'
+import Button from '../components/UI/Button'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
 import { signIn } from '../services/auth'
 
@@ -24,9 +25,9 @@ const Login = () => {
       <form action="" className='flex flex-col gap-3' onSubmit={onSubmit}>
         <input className='p-2 rounded border-solid border-b-2 dark:border-primary-dark border-primary' type="text" name='userName' required />
         <input className='p-2 rounded border-solid border-b-2 dark:border-primary-dark border-primary' type="password" name="password" required />
-        <button className='p-2 rounded border-solid bg-primary-variant dark:bg-primary-variant-dark text-white disabled:opacity-70' type="submit" disabled={isLoading}>
+        <Button type="submit" disabled={isLoading}>
           {!isLoading ? <span>Ingresar</span> : <LoadingSpinner />}
-        </button>
+        </Button>
       </form>
     </Box>
   )

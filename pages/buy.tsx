@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import CartList from '../components/CartList/CartList'
+import Button from '../components/UI/Button'
 import LoadingSpinner from '../components/UI/LoadingSpinner'
 import { ProductContext } from '../contexts/ProductContext'
 import getTotalAmount from '../helpers/getTotalAmount'
@@ -13,7 +14,7 @@ const Buy = () => {
       <h2>Finalizar Compra</h2>
       <div className='dark:bg-surface-dark bg-surface m-2 rounded-md p-4 w-9/12 flex flex-col gap-5 mx-auto'>
         <CartList />
-        <button className='rounded p-2 dark:bg-primary-dark bg-primary' disabled={isLoading} onClick={async () => {
+        <Button disabled={isLoading} onClick={async () => {
           try {
             setIsLoading(true)
             const order = await createOrder(getTotalAmount(cart));
@@ -26,7 +27,7 @@ const Buy = () => {
           {!isLoading ? 'Pagar' : (
             <LoadingSpinner />
           )}
-        </button>
+        </Button>
       </div>
     </>
   )

@@ -1,19 +1,18 @@
+import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
 import { ProductContext } from '../../contexts/ProductContext'
 import Box from '../Box'
+import Button from '../UI/Button'
 
 const ProductCard = ({ product: { id, name, price } }: any) => {
   const { cart, setCart } = useContext(ProductContext)
+  const router = useRouter()
   return (
     <Box>
       <b className='text-lg'>${price}</b>
       <p>{name}</p>
-      <button className="rounded p-2 dark:bg-secondary-dark bg-secondary w-full" onClick={() => {
-        console.log(cart);
-
+      <Button variant='secondary' onClick={() => {
         const alreadyLoadedProduct = cart.find((product) => product.id == id)
-        console.log({ alreadyLoadedProduct });
-
         if (alreadyLoadedProduct) {
           alreadyLoadedProduct.cant++
         }
@@ -21,8 +20,11 @@ const ProductCard = ({ product: { id, name, price } }: any) => {
           cart.push({ id, cant: 1, name, price });
         }
         setCart(cart)
-      }}>Agregar al carrito</button>
-      <button className="rounded p-2 dark:bg-primary-dark bg-primary">Comprar</button>
+      }}>Agregar al carrito</Button>
+      <Button onClick={() => {
+        setCart([{ id, cant: 1, name, price }])
+        router.push('/buy')
+      }}>Comprar</Button>
     </Box>
   )
 }
