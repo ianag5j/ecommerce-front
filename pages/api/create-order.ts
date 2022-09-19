@@ -31,8 +31,8 @@ const createOrder = async (req: NextApiRequest) => {
       "userName": credentials.externalUserName,
       "amount": req.body.amount.toString(),
       "description": "Venta",
-      "callback_fail": `${process.env.BASE_URL}/fail`,
-      "callback_success": `${process.env.BASE_URL}/success`,
+      "callback_fail": `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
+      "callback_success": `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
     }
     const { data: order } = await axios.post('/1/checkout', data, {
       baseURL: process.env.UALA_API_URL, headers: {
