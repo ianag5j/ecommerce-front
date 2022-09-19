@@ -8,7 +8,7 @@ export interface Credentials {
   externalClientSecret: string
 }
 
-export const getCredentials = async (accessToken: string, provider: string): Promise<credentials> => {
+export const getCredentials = async (accessToken: string, provider: string): Promise<Credentials> => {
   const { data: { credentials } } = await axios.get(`${process.env.LAMBDA_URL}/credentials`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
