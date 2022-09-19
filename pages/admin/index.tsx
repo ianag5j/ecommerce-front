@@ -19,18 +19,20 @@ const IndexPage = () => {
     }
   })
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-3 w-full'>
       <h2 className="text-xl text-primary">Administrar</h2>
-      <div className="flex">
+      <div className="flex w-full gap-2">
         {isLoading && <LoadingSpinner />}
         {!isLoading && (
-          <Box>
-            <p className='text-center'>Integracion con Uala Bis</p>
-            {hasUalaCredentials ? <span className='text-green-400 text-center'>Activado</span> : <span className='text-red-400 text-center'>Desactivado</span>}
-            {!hasUalaCredentials && (
-              <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/uala-credentials')}>Activar</button>
-            )}
-          </Box>
+          <>
+            <Box>
+              <p className='text-center'>Integracion con Uala Bis</p>
+              {hasUalaCredentials ? <span className='text-green-400 text-center'>Activado</span> : <span className='text-red-400 text-center'>Desactivado</span>}
+              {!hasUalaCredentials && (
+                <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/uala-credentials')}>Activar</button>
+              )}
+            </Box>
+          </>
         )}
       </div>
     </div>
