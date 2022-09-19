@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getCredentials } from '../../services/back/credentials';
+import { getCredentials, Credentials } from '../../services/back/credentials';
 
 type Data = {
   order?: object;
@@ -8,7 +8,7 @@ type Data = {
 }
 
 
-const getToken = async (credentials): Promise<string> => {
+const getToken = async (credentials: Credentials): Promise<string> => {
   try {
     const { data: { access_token: accessToken } } = await axios.post('/1/auth/token', {
       "user_name": credentials.externalUserName,

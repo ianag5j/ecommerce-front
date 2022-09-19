@@ -1,7 +1,14 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
-const RigthDrawer = ({ isOpen, onClose, title, children }) => {
+interface RigthDrawerProps {
+  isOpen: boolean
+  onClose(value: boolean): void;
+  title: string
+  children: React.ReactElement
+}
+
+const RigthDrawer: React.FC<RigthDrawerProps> = ({ isOpen, onClose, title, children }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>

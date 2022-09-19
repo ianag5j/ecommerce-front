@@ -1,6 +1,12 @@
 import React from 'react'
 
-const Modal = ({ children, title, footer }) => {
+interface ModalProps {
+  children: React.ReactElement
+  title: string
+  footer: React.ReactElement
+}
+
+const Modal: React.FC<ModalProps> = ({ children, title, footer }) => {
   return (
     <div>
       <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

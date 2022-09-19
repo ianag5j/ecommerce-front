@@ -1,8 +1,17 @@
 import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const login = ({ userName: Username, password: Password }) => (
+interface LoginParams {
+  userName: string
+  password: string
+}
+
+interface LogedParams {
+  accessToken: string
+  payload: { [key: string]: any }
+}
+
+const login = ({ userName: Username, password: Password }: LoginParams): Promise<LogedParams> => (
   new Promise((resolve, reject) => {
     const userPool = new CognitoUserPool({
       UserPoolId: `${process.env.COGNITO_POOL_ID}`,
@@ -41,15 +50,13 @@ const login = ({ userName: Username, password: Password }) => (
   })
 )
 
-
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
     if (req.method !== 'POST') {
-      return res.status(400).json()
+      return res.status(400).json({})
     }
     const { accessToken, payload } = await login(req.body)
     return res.status(200).json({ accessToken, payload });
