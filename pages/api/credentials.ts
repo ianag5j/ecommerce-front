@@ -17,7 +17,7 @@ export default async function handler(
     const credentials = await getCredentials(req.headers.authorization, req.query.provider as string)
     console.log(credentials);
 
-    return res.status(200).json({ hasCredentials: typeof credentials.Provider !== 'undefined' })
+    return res.status(200).json({ hasCredentials: typeof credentials !== 'undefined' })
   } catch (error: any) {
     console.log(error, error.response);
     res.status(500).json({ message: 'Error get credentials' })
