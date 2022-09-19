@@ -19,7 +19,7 @@ export default async function handler(
 
     return res.status(200).json({ hasCredentials: typeof credentials.Provider !== 'undefined' })
   } catch (error: any) {
-    console.log(error.response);
+    console.log(error, error.response);
     res.status(500).json({ message: 'Error get credentials' })
   }
 }

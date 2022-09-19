@@ -11,7 +11,7 @@ interface LogedParams {
   payload: { [key: string]: any }
 }
 
-const login = ({ userName: Username, password: Password }: LoginParams): Promise<LogedParams> => (
+const login = ({ userName: Username, password: Password }: LoginParams): Promise<LogedParams | any> => (
   new Promise((resolve, reject) => {
     const userPool = new CognitoUserPool({
       UserPoolId: `${process.env.COGNITO_POOL_ID}`,
@@ -39,10 +39,12 @@ const login = ({ userName: Username, password: Password }: LoginParams): Promise
           onSuccess: function (result) {
             console.log('----- newPasswordRequired -----');
             console.log(result);
+            resolve(result)
           },
           onFailure: (function (err) {
             console.log('----- failed change password -----');
             console.log(err);
+            reject(err)
           }),
         });
       }
