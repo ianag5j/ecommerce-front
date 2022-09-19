@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <main className='main-container'>
         <Menu />
-        <div className='mt-[80px] flex gap-3 sm:flex-row flex-col w-full'>
+        <div className='mt-[80px] flex gap-3 sm:flex-row flex-col w-full justify-evenly'>
           {children}
         </div>
       </main>

@@ -11,9 +11,9 @@ const Buy = () => {
   const { cart } = useContext(ProductContext)
   const [isLoading, setIsLoading] = useState(false)
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-3 w-full'>
       <h2 className='text-xl mb-3'>Finalizar Compra</h2>
-      <Box>
+      <Box className='m-auto'>
         <CartList />
         <Button disabled={isLoading} onClick={async () => {
           try {
