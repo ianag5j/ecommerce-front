@@ -20,6 +20,7 @@ const RedirectUala = () => {
         window.top?.location.replace('/')
       } catch (error) {
         alert('Error al guardar las credenciales')
+        window.top?.location.replace('/admin')
       }
     }
     if (typeof window !== 'undefined' && router.query.code) {

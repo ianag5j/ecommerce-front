@@ -35,7 +35,7 @@ export default async function handler(
     await saveCredentials(req.headers.authorization, data)
     return res.status(201).json({ message: 'credentials saved' })
   } catch (error: any) {
-    console.log(error.response);
-    res.status(500).json({ message: 'Error get credentials' })
+    console.log(error, error.response);
+    res.status(500).json({ message: 'Error save credentials' })
   }
 }
