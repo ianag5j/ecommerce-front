@@ -23,8 +23,8 @@ const Login = () => {
   return (
     <Box>
       <form action="" className='flex flex-col gap-3' onSubmit={onSubmit}>
-        <input className='p-2 rounded border-solid border-b-2 dark:border-primary-dark border-primary' type="text" name='userName' required />
-        <input className='p-2 rounded border-solid border-b-2 dark:border-primary-dark border-primary' type="password" name="password" required />
+        <input className='p-2 rounded border-solid border-b-2 dark:border-primary-dark border-primary' type="text" name='userName' autoComplete='username' placeholder='Usuario' required />
+        <input className='p-2 rounded border-solid border-b-2 dark:border-primary-dark border-primary' type="password" name="password" autoComplete='current-password' placeholder='Contraseña' required />
         <Button type="submit" disabled={isLoading}>
           {!isLoading ? <span>Ingresar</span> : <LoadingSpinner />}
         </Button>
