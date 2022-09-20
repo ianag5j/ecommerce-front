@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Box from '../../components/Box'
 import LoadingSpinner from '../../components/UI/LoadingSpinner'
+import WithAuth from '../../components/WithAuth'
 import { getCredentials } from '../../services/credentials'
 
 const IndexPage = () => {
@@ -46,4 +47,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default WithAuth(IndexPage)

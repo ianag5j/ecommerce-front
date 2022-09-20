@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import Box from '../../../components/Box'
 import Button from '../../../components/UI/Button'
 import LoadingSpinner from '../../../components/UI/LoadingSpinner'
+import WithAuth from '../../../components/WithAuth'
 
 const CreateProductPage = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -21,6 +22,8 @@ const CreateProductPage = () => {
       }).then(() => {
         router.push('/admin/products')
         setIsLoading(false)
+      }).catch(() => {
+        alert('Error al cargar el producto')
       })
     } catch (error) {
       alert('Login Error')
@@ -40,4 +43,4 @@ const CreateProductPage = () => {
   )
 }
 
-export default CreateProductPage
+export default WithAuth(CreateProductPage)

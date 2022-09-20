@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Box from '../../../components/Box'
 import LoadingSpinner from '../../../components/UI/LoadingSpinner'
+import WithAuth from '../../../components/WithAuth'
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([])
@@ -37,4 +38,4 @@ const ProductsPage = () => {
   )
 }
 
-export default ProductsPage
+export default WithAuth(ProductsPage)

@@ -1,4 +1,5 @@
 import React from 'react'
+import WithAuth from '../../components/WithAuth'
 
 const Adqui = () => {
   return (
@@ -6,4 +7,4 @@ const Adqui = () => {
   )
 }
 
-export default Adqui
+export default WithAuth(Adqui)
