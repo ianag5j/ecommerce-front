@@ -10,15 +10,17 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    axios.get('/api/products', {
-      headers: {
-        authorization: `Bearer ${Cookies.get('sess')}`
-      }
-    }).then(({ data }) => {
-      setProducts(data.products)
-      setIsLoading(false)
-    })
-  })
+    if (isLoading) {
+      axios.get('/api/products', {
+        headers: {
+          authorization: `Bearer ${Cookies.get('sess')}`
+        }
+      }).then(({ data }) => {
+        setProducts(data.products)
+        setIsLoading(false)
+      })
+    }
+  }, [isLoading])
   return (
     <div className='flex flex-col gap-3 w-full'>
       <h2 className='text-xl'>Productos</h2>
