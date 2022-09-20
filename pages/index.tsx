@@ -4,9 +4,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import RigthDrawer from '../components/RigthDrawer'
 import CartList from '../components/CartList/CartList'
-import Modal from '../components/Modal'
 import ProductCard from '../components/ProductCard'
-import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const [showCartList, setShowCartList] = useState(false)
