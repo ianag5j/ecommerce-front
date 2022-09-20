@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Box from '../../components/Box'
@@ -31,6 +32,12 @@ const IndexPage = () => {
               {!hasUalaCredentials && (
                 <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/uala-credentials')}>Activar</button>
               )}
+            </Box>
+            <Box>
+              <p className='text-center'>Productos</p>
+              <Link href="/admin/products">
+                <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full'>Ver</button>
+              </Link>
             </Box>
           </>
         )}
