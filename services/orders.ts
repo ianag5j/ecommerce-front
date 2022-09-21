@@ -7,5 +7,6 @@ export const createOrder = async (amount: number | string) => {
       authorization: Cookies.get('sess') as string
     }
   });
+
   return order
 }

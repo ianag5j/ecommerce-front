@@ -23,7 +23,7 @@ const getToken = async (credentials: Credentials): Promise<string> => {
   }
 }
 
-const createOrder = async (req: NextApiRequest) => {
+const createUalaOrder = async (orderId: string, req: NextApiRequest) => {
   try {
     const credentials = await getCredentials(req.headers.authorization as string, 'Uala')
     const accessToken = await getToken(credentials)
@@ -33,7 +33,9 @@ const createOrder = async (req: NextApiRequest) => {
       "description": "Venta",
       "callback_fail": `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
       "callback_success": `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
+      "notification_url": `${process.env.LAMBDA_URL}/webhook/order/${orderId}`
     }
+    console.log(data);
     const { data: order } = await axios.post('/1/checkout', data, {
       baseURL: process.env.UALA_API_URL, headers: {
         Authorization: `Bearer ${accessToken}`
@@ -46,7 +48,12 @@ const createOrder = async (req: NextApiRequest) => {
   }
 }
 
-
+const createOrder = async (amount: string, accessToken: string) => {
+  const { data: { order } } = await axios.post(`${process.env.LAMBDA_URL}/orders`, { amount }, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  return order
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,11 +63,12 @@ export default async function handler(
     if (req.method !== 'POST') {
       return res.status(400)
     }
-    const order = await createOrder(req)
-    if (order) {
-      return res.status(201).json({ order })
-    }
+    const order = await createOrder(req.body.amount.toString(), req.headers.authorization as string)
+    const ualaOrder = await createUalaOrder(order.Id.S, req)
+
+    return res.status(201).json({ order: ualaOrder })
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'error create credencials' })
   }
 }
