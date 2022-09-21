@@ -75,6 +75,17 @@ export default function Example() {
                       <button
                         className={`${active ? 'bg-violet-500' : 'dark:text-white text-gray-900'
                           } text-white group flex w-full items-center rounded-md px-2 py-2 text-sm cursor-pointer`}
+                        onClick={() => router.push('/admin/orders')}
+                      >
+                        Ordenes
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        className={`${active ? 'bg-violet-500' : 'dark:text-white text-gray-900'
+                          } text-white group flex w-full items-center rounded-md px-2 py-2 text-sm cursor-pointer`}
                         onClick={() => router.push('/logout')}
                       >
                         Cerrar sesion
