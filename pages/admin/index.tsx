@@ -34,7 +34,7 @@ const IndexPage = () => {
                 <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/uala-credentials')}>Activar</button>
               )}
             </Box>
-            <Box>
+            <Box className="justify-between">
               <p className='text-center'>Productos</p>
               <Link href="/admin/products">
                 <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full'>Ver</button>
