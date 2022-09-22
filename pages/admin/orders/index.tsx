@@ -29,10 +29,10 @@ const OrdersPage = () => {
   return (
     <div className='flex flex-col gap-3 w-full'>
       <h2 className='text-xl'>Ordenes</h2>
-      <div className="flex w-full gap-2">
+      <div className="flex w-full gap-2 flex-wrap">
         {isLoading && <LoadingSpinner />}
         {orders.map((orders: any) => (
-          <Box key={`orders-${orders.Id}`}>
+          <Box key={`orders-${orders.Id}`} className="flex-[1_0_21%]">
             <b className='text-lg'>Monto ${orders.Amount}</b>
             <p>Estado: {orders.Status}</p>
             <p>Creado: {new Date(orders.CreatedAt).toLocaleString()}</p>
