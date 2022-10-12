@@ -18,7 +18,7 @@ const Buy = () => {
         <Button disabled={isLoading} onClick={async () => {
           try {
             setIsLoading(true)
-            const order = await createOrder(getTotalAmount(cart));
+            const order = await createOrder(cart);
             window.location = order.links.checkoutLink;
           } catch (error) {
             alert('Error al crear la solicitud de pago');

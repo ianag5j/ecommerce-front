@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import Product from '../../Interfaces/Product';
 import { getCredentials, Credentials } from '../../services/back/credentials';
 
 type Data = {
@@ -23,13 +24,13 @@ const getToken = async (credentials: Credentials): Promise<string> => {
   }
 }
 
-const createUalaOrder = async (orderId: string, req: NextApiRequest) => {
+const createUalaOrder = async (orderId: string, amount: string, req: NextApiRequest) => {
   try {
     const credentials = await getCredentials(req.headers.authorization as string, 'Uala')
     const accessToken = await getToken(credentials)
     const data = {
       "userName": credentials.externalUserName,
-      "amount": req.body.amount.toString(),
+      amount,
       "description": "Venta",
       "callback_fail": `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
       "callback_success": `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
@@ -48,8 +49,8 @@ const createUalaOrder = async (orderId: string, req: NextApiRequest) => {
   }
 }
 
-const createOrder = async (amount: string, accessToken: string) => {
-  const { data: { order } } = await axios.post(`${process.env.LAMBDA_URL}/orders`, { amount }, {
+const createOrder = async (cart: Array<Product>, accessToken: string) => {
+  const { data: { order } } = await axios.post(`${process.env.LAMBDA_URL}/orders`, { cart }, {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
   return order
@@ -63,8 +64,8 @@ export default async function handler(
     if (req.method !== 'POST') {
       return res.status(400)
     }
-    const order = await createOrder(req.body.amount.toString(), req.headers.authorization as string)
-    const ualaOrder = await createUalaOrder(order.Id.S, req)
+    const order = await createOrder(req.body.cart, req.headers.authorization as string)
+    const ualaOrder = await createUalaOrder(order.Id.S, order.Amount.S, req)
 
     return res.status(201).json({ order: ualaOrder })
   } catch (error) {
