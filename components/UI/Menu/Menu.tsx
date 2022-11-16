@@ -10,7 +10,7 @@ export default function Example() {
   const isLoged = Cookies.get('sess') !== undefined
   return (
     <div className="fixed top-0 right-0 p-3 dark:bg-surface-dark bg-surface w-full shadow h-[60px] flex items-center z-50">
-      <Link href="/">Ecommerce</Link>
+      <Link href="/">{router.query.storeId ?? 'Ecommerce'}</Link>
       <Menu as="div" className="relative inline-block text-left ml-auto">
         <Menu.Button className="inline-flex w-full justify-center rounded-md dark:bg-primary-variant-dark bg-primary-variant px-4 py-2 text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           Menu
