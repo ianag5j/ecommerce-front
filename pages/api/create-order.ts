@@ -3,6 +3,7 @@ import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Product from '../../Interfaces/Product';
 import { getCredentials, Credentials } from '../../services/back/credentials';
+import ualaBisSDK from 'ualabis-nodejs'
 
 type Data = {
   order?: object;
@@ -28,22 +29,20 @@ const getToken = async (credentials: Credentials): Promise<string> => {
 const createUalaOrder = async (orderId: string, amount: string, accessToken: string) => {
   try {
     const credentials = await getCredentials(accessToken, 'Uala')
-    const ualaAccessToken = await getToken(credentials)
-    const data = {
-      "userName": credentials.externalUserName,
-      amount,
-      "description": "Venta",
-      "callback_fail": `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
-      "callback_success": `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
-      "notification_url": `${process.env.LAMBDA_URL}/webhook/order/${orderId}`
-    }
-    console.log(data);
-    const { data: order } = await axios.post('/1/checkout', data, {
-      baseURL: process.env.UALA_API_URL, headers: {
-        Authorization: `Bearer ${ualaAccessToken}`
-      }
+    await ualaBisSDK.setUp({
+      userName: credentials.externalUserName,
+      clientId: credentials.externalClientId,
+      clientSecret: credentials.externalClientSecret,
+      isDev: true
     })
-    return order
+
+    return await ualaBisSDK.createOrder({
+      amount: parseFloat(amount),
+      description: "Venta",
+      callbackFail: `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
+      callbackSuccess: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
+      notificationUrl: `${process.env.LAMBDA_URL}/webhook/order/${orderId}`
+    })
   } catch (error) {
     console.log(error);
     throw error
@@ -71,7 +70,6 @@ export default async function handler(
     }
     const order = await createOrder(req.body.cart, accessToken)
     const ualaOrder = await createUalaOrder(order.Id.S, order.Amount.S, accessToken)
-
     return res.status(201).json({ order: ualaOrder })
   } catch (error) {
     console.log(error);
