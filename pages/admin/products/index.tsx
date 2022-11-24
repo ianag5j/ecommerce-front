@@ -11,14 +11,11 @@ const ProductsPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     if (isLoading) {
-      axios.get('/api/products', {
-        headers: {
-          authorization: `Bearer ${Cookies.get('sess')}`
-        }
-      }).then(({ data }) => {
-        setProducts(data.products)
-        setIsLoading(false)
-      })
+      axios.get('/api/products').
+        then(({ data }) => {
+          setProducts(data.products)
+          setIsLoading(false)
+        })
     }
   }, [isLoading])
   return (

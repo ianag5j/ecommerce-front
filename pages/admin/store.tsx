@@ -15,11 +15,7 @@ const StorePage = () => {
   const router = useRouter()
   useEffect(() => {
     if (isLoading) {
-      axios.get('/api/products', {
-        headers: {
-          authorization: `Bearer ${Cookies.get('sess')}`
-        }
-      }).then(({ data }) => {
+      axios.get('/api/products').then(({ data }) => {
         setProducts(data.products)
         setIsLoading(false)
       })

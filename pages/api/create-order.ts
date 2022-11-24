@@ -1,3 +1,4 @@
+import { getAccessToken } from '@auth0/nextjs-auth0';
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Product from '../../Interfaces/Product';
@@ -24,10 +25,10 @@ const getToken = async (credentials: Credentials): Promise<string> => {
   }
 }
 
-const createUalaOrder = async (orderId: string, amount: string, req: NextApiRequest) => {
+const createUalaOrder = async (orderId: string, amount: string, accessToken: string) => {
   try {
-    const credentials = await getCredentials(req.headers.authorization as string, 'Uala')
-    const accessToken = await getToken(credentials)
+    const credentials = await getCredentials(accessToken, 'Uala')
+    const ualaAccessToken = await getToken(credentials)
     const data = {
       "userName": credentials.externalUserName,
       amount,
@@ -39,7 +40,7 @@ const createUalaOrder = async (orderId: string, amount: string, req: NextApiRequ
     console.log(data);
     const { data: order } = await axios.post('/1/checkout', data, {
       baseURL: process.env.UALA_API_URL, headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${ualaAccessToken}`
       }
     })
     return order
@@ -61,11 +62,15 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   try {
+    const { accessToken } = await getAccessToken(req, res)
     if (req.method !== 'POST') {
       return res.status(400)
     }
-    const order = await createOrder(req.body.cart, req.headers.authorization as string)
-    const ualaOrder = await createUalaOrder(order.Id.S, order.Amount.S, req)
+    if (!accessToken) {
+      return res.status(401).json({})
+    }
+    const order = await createOrder(req.body.cart, accessToken)
+    const ualaOrder = await createUalaOrder(order.Id.S, order.Amount.S, accessToken)
 
     return res.status(201).json({ order: ualaOrder })
   } catch (error) {

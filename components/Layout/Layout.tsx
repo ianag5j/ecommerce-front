@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import Menu from '../UI/Menu'
 import { useRouter } from 'next/router'
+import { ErrorContext } from '../../contexts/ErrorContext'
 
 interface LayoutProps {
   children: React.ReactElement
@@ -10,6 +11,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter()
+  const { errorMessage } = useContext(ErrorContext)
   if (router.pathname.includes('redirect')) {
     return children
   }
@@ -17,8 +19,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <main className='main-container'>
         <Menu />
-        <div className='mt-[80px] flex gap-3 sm:flex-row flex-col w-full justify-evenly'>
-          {children}
+        <div className='mt-[80px] w-full gap-3 flex flex-col'>
+          {errorMessage && (
+            <p className='bg-error dark:bg-error-dark w-full p-3 rounded'>
+              {errorMessage}
+            </p>
+          )}
+          <div className='flex gap-3 sm:flex-row flex-col w-full justify-evenly'>
+            {children}
+          </div>
         </div>
       </main>
       <footer className={styles.footer}>

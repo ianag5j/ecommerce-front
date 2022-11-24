@@ -1,6 +1,4 @@
 import axios from 'axios'
-import Cookies from 'js-cookie'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Box from '../../../components/Box'
 import LoadingSpinner from '../../../components/UI/LoadingSpinner'
@@ -10,14 +8,9 @@ const OrdersPage = () => {
   const [orders, setOrders] = useState<any>([])
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    axios.get('/api/orders', {
-      headers: {
-        authorization: Cookies.get('sess') as string
-      }
-    })
+    axios.get('/api/orders')
       .then(({ data }) => {
         setOrders(data.orders)
-
       })
       .catch(() => {
         alert('Error al obtener las ordenes')

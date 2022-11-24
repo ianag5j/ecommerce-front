@@ -14,20 +14,13 @@ const CreateProductPage = () => {
     setIsLoading(true)
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement);
-    try {
-      axios.post('/api/products', { name: formData.get('name'), price: formData.get('price') }, {
-        headers: {
-          authorization: `Bearer ${Cookies.get('sess')}`
-        }
-      }).then(() => {
+    axios.post('/api/products', { name: formData.get('name'), price: formData.get('price') })
+      .then(() => {
         router.push('/admin/products')
         setIsLoading(false)
       }).catch(() => {
         alert('Error al cargar el producto')
       })
-    } catch (error) {
-      alert('Login Error')
-    }
     setIsLoading(false)
   }
   return (

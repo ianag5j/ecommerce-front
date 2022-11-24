@@ -1,20 +1,25 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Box from '../../components/Box'
 import LoadingSpinner from '../../components/UI/LoadingSpinner'
 import WithAuth from '../../components/WithAuth'
+import { ErrorContext } from '../../contexts/ErrorContext'
 import { getCredentials } from '../../services/credentials'
 
 const IndexPage = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const { setErrorMessage } = useContext(ErrorContext)
   const router = useRouter()
   const [hasUalaCredentials, setHasUalaCredentials] = useState(false)
   useEffect(() => {
     const run = async () => {
-      console.log('getCredentials');
-      setHasUalaCredentials(await getCredentials('Uala'))
-      setIsLoading(false)
+      try {
+        setHasUalaCredentials(await getCredentials('Uala'))
+        setIsLoading(false)
+      } catch (error: any) {
+        setErrorMessage(error.response.data.message)
+      }
     }
     if (typeof window !== 'undefined') {
       run()

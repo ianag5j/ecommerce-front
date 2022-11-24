@@ -1,22 +1,23 @@
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-
+import { useUser } from '@auth0/nextjs-auth0'
+import LoadingSpinner from '../UI/LoadingSpinner'
 const WithAuth = (Component: any) => {
   const AuthenticatedComponent = () => {
     const router = useRouter();
-    const [isLoged, setIsLoged] = useState(true)
+    const { isLoading, user } = useUser()
 
     useEffect(() => {
-      if (typeof window !== 'undefined') {
-        if (!Cookies.get('sess')) {
-          router.replace('/logout')
-          setIsLoged(false)
-        }
+      if (!isLoading && user === undefined) {
+        router.replace('/api/auth/logout')
       }
-    }, [router]);
+    }, [user, isLoading, router]);
 
-    return !!isLoged ? <Component /> : null;
+    if (isLoading) {
+      return <LoadingSpinner />
+    }
+    return <Component />;
   };
 
 
