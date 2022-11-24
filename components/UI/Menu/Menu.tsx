@@ -9,7 +9,6 @@ import LoadingSpiner from '../LoadingSpinner/LoadingSpinner'
 export default function Example() {
   const router = useRouter()
   const { user, error, isLoading } = useUser()
-  console.log(useUser());
   const isAuthenticated = !isLoading && user !== undefined
   return (
     <div className="fixed top-0 right-0 p-3 dark:bg-surface-dark bg-surface w-full shadow h-[60px] flex items-center z-50">

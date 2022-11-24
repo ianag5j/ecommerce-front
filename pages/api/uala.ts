@@ -1,5 +1,6 @@
 
 
+import { getAccessToken } from '@auth0/nextjs-auth0'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -20,7 +21,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    if (!req.headers.authorization) {
+    const { accessToken } = await getAccessToken(req, res)
+    if (!accessToken) {
       res.status(401).json({})
       return
     }
@@ -32,7 +34,7 @@ export default async function handler(
       }
     })
     console.log(data);
-    await saveCredentials(req.headers.authorization, data)
+    await saveCredentials(accessToken, data)
     res.status(201).json({ message: 'credentials saved' })
   } catch (error: any) {
     console.log(error, error.response);
