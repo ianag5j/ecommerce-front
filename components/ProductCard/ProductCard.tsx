@@ -23,7 +23,7 @@ const ProductCard = ({ product: { id, name, price } }: any) => {
       }}>Agregar al carrito</Button>
       <Button onClick={() => {
         setCart([{ id, cant: 1, name, price }])
-        router.push('/buy')
+        router.push(`${router.query.storeId}/buy`)
       }}>Comprar</Button>
     </Box>
   )
