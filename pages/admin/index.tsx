@@ -35,7 +35,7 @@ const IndexPage = () => {
   }, [])
   return (
     <div className='flex flex-col gap-3 w-full'>
-      <h2 className="text-xl text-primary">Administrar</h2>
+      <h2 className="text-xl text-primary dark:text-primary-dark">Administrar</h2>
       <div className="flex w-full gap-2">
         {isLoading && <LoadingSpinner />}
         {!isLoading && (
@@ -51,7 +51,7 @@ const IndexPage = () => {
                 </>
               ) : <span className='text-red-400 text-center'>Desactivado</span>}
               {!store && (
-                <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/uala-credentials')}>Configurar</button>
+                <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/store/create')}>Configurar</button>
               )}
             </Box>
             <Box>
