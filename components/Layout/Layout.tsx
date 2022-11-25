@@ -4,6 +4,7 @@ import styles from '../../styles/Home.module.css'
 import Menu from '../UI/Menu'
 import { useRouter } from 'next/router'
 import { ErrorContext } from '../../contexts/ErrorContext'
+import { PlusIcon } from '@heroicons/react/20/solid'
 
 interface LayoutProps {
   children: React.ReactElement
@@ -11,7 +12,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter()
-  const { errorMessage } = useContext(ErrorContext)
+  const { errorMessage, setErrorMessage } = useContext(ErrorContext)
   if (router.pathname.includes('redirect')) {
     return children
   }
@@ -21,8 +22,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Menu />
         <div className='mt-[80px] w-full gap-3 flex flex-col'>
           {errorMessage && (
-            <p className='bg-error dark:bg-error-dark w-full p-3 rounded'>
+            <p className='bg-error dark:bg-error-dark w-full p-3 rounded relative'>
               {errorMessage}
+              <PlusIcon
+                width="24"
+                className='absolute right-3 top-3 rotate-45 cursor-pointer'
+                aria-hidden="true"
+                onClick={() => { setErrorMessage(null) }}
+              />
             </p>
           )}
           <div className='flex gap-3 sm:flex-row flex-col w-full justify-evenly'>
