@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import CartList from '../../components/CartList/CartList'
-import ProductCard from '../../components/ProductCard'
-import RigthDrawer from '../../components/RigthDrawer'
-import LoadingSpinner from '../../components/UI/LoadingSpinner'
-import { getProductsByStore } from '../../services/store'
+import CartList from 'components/CartList/CartList'
+import ProductCard from 'components/ProductCard'
+import RigthDrawer from 'components/RigthDrawer'
+import LoadingSpinner from 'components/UI/LoadingSpinner'
+import { getProductsByStore } from 'services/store'
 
 const UserStore = () => {
   const router = useRouter()
@@ -41,7 +41,7 @@ const UserStore = () => {
             <button
               type="button"
               className="inline-flex w-full justify-center rounded-md border border-transparent dark:bg-primary-dark bg-primary px-4 py-2 text-base font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={() => router.push('/buy')}
+              onClick={() => router.push(`${router.query.storeId}/buy`)}
             >
               Comprar
             </button>

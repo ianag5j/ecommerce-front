@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { ChevronDownIcon, UserIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0';
 import Link from 'next/link'
