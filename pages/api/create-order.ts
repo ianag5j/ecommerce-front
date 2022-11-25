@@ -10,22 +10,6 @@ type Data = {
   message?: string;
 }
 
-
-const getToken = async (credentials: Credentials): Promise<string> => {
-  try {
-    const { data: { access_token: accessToken } } = await axios.post('/1/auth/token', {
-      "user_name": credentials.externalUserName,
-      "client_id": credentials.externalClientId,
-      "client_secret_id": credentials.externalClientSecret,
-      "grant_type": 'client_credentials',
-    }, { baseURL: process.env.UALA_AUTH_URL })
-    return accessToken
-  } catch (error) {
-    console.log(error);
-    throw error
-  }
-}
-
 const createUalaOrder = async (orderId: string, amount: string, accessToken: string) => {
   try {
     const credentials = await getCredentials(accessToken, 'Uala')
