@@ -51,7 +51,7 @@ const IndexPage = () => {
                 </>
               ) : <span className='text-red-400 text-center'>Desactivado</span>}
               {!store && (
-                <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/store/create')}>Configurar</button>
+                <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/stores/create')}>Configurar</button>
               )}
             </Box>
             <Box>
