@@ -16,11 +16,9 @@ const CreateProductPage = () => {
     axios.post('/api/products', { name: formData.get('name'), price: formData.get('price') })
       .then(() => {
         router.push('/admin/products')
-        setIsLoading(false)
       }).catch(() => {
         alert('Error al cargar el producto')
       })
-    setIsLoading(false)
   }
   return (
     <Box>
