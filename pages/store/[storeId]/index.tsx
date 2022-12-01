@@ -27,8 +27,8 @@ const UserStore = () => {
   return (
     <div className='flex flex-col gap-3 w-full'>
       <h2 className='text-xl'>Productos</h2>
+      {isLoading && <LoadingSpinner />}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-2 mb-20">
-        {isLoading && <LoadingSpinner />}
         {products.map((product: any) => (
           <ProductCard key={`product-${product.id}`} product={product}>
             <b className='text-lg'>${product.price}</b>
