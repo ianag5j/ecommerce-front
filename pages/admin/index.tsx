@@ -36,7 +36,7 @@ const IndexPage = () => {
   return (
     <div className='flex flex-col gap-3 w-full'>
       <h2 className="text-xl text-primary dark:text-primary-dark">Administrar</h2>
-      <div className="flex w-full gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-2 mb-20">
         {isLoading && <LoadingSpinner />}
         {!isLoading && (
           <>

@@ -24,7 +24,7 @@ const ProductsPage = () => {
       <Link href="/admin/products/create">
         <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full md:max-w-xl mb-3 m-auto'>+</button>
       </Link>
-      <div className="flex w-full gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-2">
         {isLoading && <LoadingSpinner />}
         {products.map((product: any) => (
           <Box key={`product-${product.id}`}>

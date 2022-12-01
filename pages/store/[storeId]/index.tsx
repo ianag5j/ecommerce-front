@@ -27,7 +27,7 @@ const UserStore = () => {
   return (
     <div className='flex flex-col gap-3 w-full'>
       <h2 className='text-xl'>Productos</h2>
-      <div className="flex w-full gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-2 mb-20">
         {isLoading && <LoadingSpinner />}
         {products.map((product: any) => (
           <ProductCard key={`product-${product.id}`} product={product}>
@@ -54,7 +54,7 @@ const UserStore = () => {
             </button>
           </>
         </RigthDrawer>
-        <div className='w-full dark:bg-surface-dark bg-surface p-4 absolute bottom-0 left-0'>
+        <div className='w-full dark:bg-surface-dark bg-surface p-4 bottom-0 left-0 fixed'>
           <button className='rounded p-2 px-4 dark:bg-primary-dark bg-primary ml-auto sm:w-auto w-full float-right' onClick={() => setShowCartList(true)}>Finalizar compra</button>
         </div>
       </div>

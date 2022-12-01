@@ -1,7 +1,7 @@
 import { getAccessToken } from '@auth0/nextjs-auth0'
 import getErrorMessage from 'helpers/getErrorMessage'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createStore } from '../../services/back/store'
+import { createStore } from 'services/back/store'
 
 export default async function handler(
   req: NextApiRequest,
