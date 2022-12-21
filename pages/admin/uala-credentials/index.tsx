@@ -1,5 +1,5 @@
 import React from 'react'
-import WithAuth from '../../components/WithAuth'
+import WithAuth from 'components/WithAuth'
 
 const Adqui = () => {
   return (

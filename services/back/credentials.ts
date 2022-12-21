@@ -17,3 +17,12 @@ export const getCredentials = async (accessToken: string, provider: string): Pro
   })
   return credentials
 }
+
+export const deleteCredentials = async (accessToken: string, provider: string) => {
+  await axios.delete(`${process.env.LAMBDA_URL}/v2/credentials`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    },
+    params: { provider }
+  })
+}

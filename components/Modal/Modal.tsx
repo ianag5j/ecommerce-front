@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface ModalProps {
-  children: React.ReactElement
+  children?: React.ReactElement
   title: string
   footer: React.ReactElement
 }
