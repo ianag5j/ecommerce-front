@@ -5,7 +5,7 @@ import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const saveCredentials = async (accessToken: string, userCredentials: any) => (
-  axios.post(`${process.env.LAMBDA_URL}/credentials`, {
+  axios.post(`${process.env.LAMBDA_URL}/v2/credentials`, {
     externalClientId: userCredentials.client_id,
     externalClientSecret: userCredentials.client_secret_id,
     externalUserName: userCredentials.username
