@@ -6,6 +6,9 @@ import Box from 'components/Box'
 import LoadingSpinner from 'components/UI/LoadingSpinner'
 import WithAuth from 'components/WithAuth'
 import { ErrorContext } from 'contexts/ErrorContext'
+import Modal from 'components/Modal'
+import Button from 'components/UI/Button'
+import { deleteCredentials } from 'services/credentials'
 
 type AccountData = {
   hasUalaCredentials?: boolean,
@@ -17,6 +20,8 @@ type AccountData = {
 
 const IndexPage = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [showDeleteCredentialsModal, setShowDeleteCredentialsModal] = useState(false)
+  const [isLoadingDeleteCredentials, setIsLoadingDeleteCredentials] = useState(false)
   const { setErrorMessage } = useContext(ErrorContext)
   const router = useRouter()
   const [{ hasUalaCredentials, store }, setAccountData] = useState<AccountData>({ hasUalaCredentials: undefined, store: undefined })
@@ -55,10 +60,32 @@ const IndexPage = () => {
               )}
             </Box>
             <Box>
-              <p className='text-center'>Integracion con Uala Bis</p>
+              <p className='text-center'>Integracion con Ualá Bis</p>
               {hasUalaCredentials ? <span className='text-green-400 text-center'>Activado</span> : <span className='text-red-400 text-center'>Desactivado</span>}
               {!hasUalaCredentials && (
                 <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full' onClick={() => router.push('/admin/uala-credentials')}>Activar</button>
+              )}
+              {hasUalaCredentials && (
+                <button className='rounded p-2 dark:bg-error-dark bg-error w-full' onClick={() => setShowDeleteCredentialsModal(true)}>Eliminar</button>
+              )}
+              {showDeleteCredentialsModal && (
+                <Modal title='Eliminar integracion con Ualá Bis' footer={
+                  <div className="w-full flex gap-2">
+                    <Button className='w-full' onClick={() => setShowDeleteCredentialsModal(false)}>No</Button>
+                    <Button variant="error" className='w-full' onClick={() => {
+                      setIsLoadingDeleteCredentials(true)
+                      deleteCredentials()
+                        .then(() => {
+                          router.reload()
+                        })
+                        .catch((error) => {
+                          setIsLoadingDeleteCredentials(false)
+                          setErrorMessage(error.response.data.message)
+                        })
+                    }}>{isLoadingDeleteCredentials ? <LoadingSpinner /> : 'Si'} </Button>
+                  </div>
+                }
+                />
               )}
             </Box>
             <Box className="justify-between">
