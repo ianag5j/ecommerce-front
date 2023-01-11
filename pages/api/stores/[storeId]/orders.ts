@@ -8,7 +8,7 @@ type Data = {
   message?: string;
 }
 const createOrder = async (cart: Array<Product>, storeName: string) => {
-  const { data } = await axios.post(`${process.env.LAMBDA_URL}/orders`, { cart, storeName })
+  const { data } = await axios.post(`${process.env.LAMBDA_URL}/v2/orders`, { cart, storeName })
   return data
 }
 
