@@ -10,7 +10,7 @@ export interface Order {
 }
 
 export const getOrders = async (accessToken: string): Promise<{ orders: [Order] }> => {
-  const { data: { orders } } = await axios.get(`${process.env.LAMBDA_URL}/orders`, {
+  const { data: { orders } } = await axios.get(`${process.env.LAMBDA_URL}/v2/orders`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
     },
