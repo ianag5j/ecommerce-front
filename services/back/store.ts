@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const getStore = async (accessToken: string) => {
-  const { data } = await axios.get(`${process.env.LAMBDA_URL}/v2/stores`, {
+  const { data } = await axios.get(`${process.env.LAMBDA_URL}/v2/store`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
     }
