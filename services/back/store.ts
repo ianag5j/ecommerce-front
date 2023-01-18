@@ -10,7 +10,7 @@ const getStore = async (accessToken: string) => {
 }
 
 const createStore = async (storeName: string, accessToken: string) => {
-  const { data } = await axios.post(`${process.env.LAMBDA_URL}/stores`, { name: storeName }, {
+  const { data } = await axios.post(`${process.env.LAMBDA_URL}/v2/store`, { name: storeName }, {
     headers: {
       Authorization: `Bearer ${accessToken}`
     }
