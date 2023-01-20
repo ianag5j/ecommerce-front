@@ -16,13 +16,13 @@ export default async function handler(
       return res.status(404).json({})
     }
 
-    const orders = await createStore(req.body.name, accessToken)
-    return res.status(200).json({ orders })
+    const store = await createStore(req.body.name, accessToken)
+    return res.status(200).json({ store })
   } catch (error: any) {
     let errorMessage = 'Error al crear la tienda'
     console.log(error.response.data);
-    if (error.response.data.errorCode) {
-      errorMessage = getErrorMessage(error.response.data.errorCode)
+    if (error.response.data.error_code) {
+      errorMessage = getErrorMessage(error.response.data.error_code)
     }
     res.status(500).json({ message: errorMessage })
   }

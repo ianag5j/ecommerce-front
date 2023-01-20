@@ -13,8 +13,8 @@ import { deleteCredentials } from 'services/credentials'
 type AccountData = {
   hasUalaCredentials?: boolean,
   store?: {
-    Name: string,
-    UserId: string
+    name: string,
+    user_id: string
   }
 }
 
@@ -49,8 +49,8 @@ const IndexPage = () => {
               <p className='text-center'>Tienda</p>
               {store ? (
                 <>
-                  <span className='text-green-400 text-center'>{store.Name}</span>
-                  <Link href={`/store/${store.Name}`}>
+                  <span className='text-green-400 text-center'>{store.name}</span>
+                  <Link href={`/store/${store.name}`}>
                     <button className='rounded p-2 dark:bg-primary-dark bg-primary w-full'>Ver Tienda</button>
                   </Link>
                 </>
