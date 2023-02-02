@@ -1,4 +1,5 @@
 import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+import logError from 'helpers/logError';
 
 export default handleAuth({
   async login(req, res) {
@@ -9,6 +10,7 @@ export default handleAuth({
         }
       });
     } catch (error: any) {
+      logError(error)
       res.status(error.status || 400).end(error.message);
     }
   }
