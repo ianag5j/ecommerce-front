@@ -1,5 +1,6 @@
 import { getAccessToken } from '@auth0/nextjs-auth0';
 import axios from 'axios';
+import logError from 'helpers/logError';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -27,6 +28,7 @@ export default async function handler(
     return res.status(200).json({});
   }
   catch (error) {
+    logError(error)
     console.log(error);
     res.status(500).json({ message: 'error get/create products' })
   }

@@ -2,6 +2,7 @@
 
 import { getAccessToken } from '@auth0/nextjs-auth0'
 import axios from 'axios'
+import logError from 'helpers/logError'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { deleteCredentials } from 'services/back/credentials'
 
@@ -47,6 +48,7 @@ export default async function handler(
       return
     }
   } catch (error: any) {
+    logError(error)
     console.log(error, error.response);
     res.status(500).json({ message: 'Error save/delete credentials' })
   }

@@ -2,6 +2,7 @@ import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Product from 'Interfaces/Product';
 import getErrorMessage from 'helpers/getErrorMessage';
+import logError from 'helpers/logError';
 
 type Data = {
   order?: object;
@@ -28,6 +29,7 @@ export default async function handler(
       }
     })
   } catch (error: any) {
+    logError(error)
     console.log(error);
     let errorMessage = 'Error al crear la orden'
     if (error.response.data.errorCode) {
