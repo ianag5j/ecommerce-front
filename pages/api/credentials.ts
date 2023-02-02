@@ -1,6 +1,7 @@
 import { getAccessToken } from '@auth0/nextjs-auth0'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getCredentials } from '../../services/back/credentials'
+import logError from 'helpers/logError';
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,6 +21,7 @@ export default async function handler(
     console.log(credentials);
     return res.status(200).json({ hasCredentials: typeof credentials !== 'undefined' })
   } catch (error: any) {
+    logError(error)
     console.log(error, error.response);
     res.status(500).json({ message: 'Error get credentials' })
   }
